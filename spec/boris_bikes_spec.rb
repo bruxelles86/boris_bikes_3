@@ -27,10 +27,18 @@ it { is_expected.to respond_to(:dock).with(1).argument}
 
 it { is_expected.to respond_to :bike }
 
+describe "#dock" do
+
 it 'Docks a bike' do
   bike = Bike.new
   expect(subject.dock(bike)).to eq bike
 end
 
+it 'Raises an error when bike capacity is full' do
+  subject.dock(Bike.new)
+  expect { subject.dock(Bike.new) }.to raise_error "Capacity is full"
+end
+
+end
 
 end
