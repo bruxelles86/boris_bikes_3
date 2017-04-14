@@ -4,8 +4,13 @@ require 'bike'
 describe DockingStation do
 
   it 'Creates capacity limit defined by user' do
-    docking_station = DockingStation.new 10
-    expect(docking_station.capacity).to eq 10
+    station = DockingStation.new 10
+    expect(station.capacity).to eq 10
+  end
+
+  it 'Defaults capacity to 20 if not set by user' do
+    station = DockingStation.new
+    expect(station.capacity).to eq 20
   end
 
   describe'#release_bike' do
@@ -39,8 +44,9 @@ it 'Docks a bike' do
   expect(subject.dock(bike).pop).to eq bike
 end
 
+
 it 'Raises an error when bike capacity is full' do
-  DEFAULT_CAPACITY.times do subject.dock(Bike.new) end
+  DockingStation::DEFAULT_CAPACITY.times do subject.dock(Bike.new) end
   expect { subject.dock(Bike.new) }.to raise_error "Capacity is full"
 end
 
