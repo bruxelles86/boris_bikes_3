@@ -3,6 +3,11 @@ require 'bike'
 
 describe DockingStation do
 
+  it 'Creates capacity limit defined by user' do
+    docking_station = DockingStation.new 10
+    expect(docking_station.capacity).to eq 10
+  end
+
   describe'#release_bike' do
     it "releases a bike" do
       bike = Bike.new
